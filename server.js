@@ -4,6 +4,8 @@ const axios = require('axios')
 const app = express()
 const port = 3000
 
+
+
 app.get('/', (req, res) =>{
     res.send('Hello World!')
 })
@@ -12,7 +14,7 @@ app.get('/rota', (req, res) =>{
     res.send('Minha primeira rota')
 })
 app.get('/consulta-cep/:cep', async (req, res) =>{
-    const regex = /^[0-9]{5}-[0-9]{3}$/
+    const regex = /^[0-9]{5}-[0-9]{3}$/;
     const cep = req.params.cep
 
     if (regex.test(cep)){
