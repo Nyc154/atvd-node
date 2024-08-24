@@ -1,53 +1,58 @@
-const {Sequelize, DataTypes} = require('sequelize');
-const { NOT } = require('sequelize/types/deferrable');
-const sequelize = new Sequelize('sqlite::memory');
+const { Model, DataTypes, Sequelize } = require('sequelize');
+const sequelize = new Sequelize('apinode', 'root', 'banco123', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
 
-const user = sequelize.define(
-    'Endereço',
-{
+class Endereco extends Model { }
 
-    id: {
-        type: DataTypes.BIGINT,
-        primaryKay: true,
-        autoIncrement: true
+Endereco.init(
+    {
+        id: {
+            type: DataTypes.BIGINT,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: true,
+        },
+        logradouro: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        numero: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        cep: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        complemento: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        bairro: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        cidade: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        estado: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        municipioIBGE: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     },
-    Cep: {
-        type: DataTypes.STRING,
-        allowNull: false
+    {
+        sequelize,
+        modelName: 'Endereco',
+        tableName: 'enderecos',
+        timestamps: true
     },
-    Logadouro: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Numero: {
-        type: DataTypes.SMALLINT,
-        allowNull: false
-    },
-    Complemento: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Bairro: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Cidade: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Estado: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    MunicipioIBGE: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    sequelize, 
-    modelname: 'Endereco',
-    tablename:'endereco',
-    timestamps: true
-    
-})
-    
+);
+
+module.exports = Endereco;
